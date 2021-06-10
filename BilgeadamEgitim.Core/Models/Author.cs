@@ -1,6 +1,7 @@
 ﻿using BilgeadamEgitim.Core.Models.Base;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace BilgeadamEgitim.Core.Models
 {
@@ -11,6 +12,9 @@ namespace BilgeadamEgitim.Core.Models
         {
             Contents = new Collection<Content>();
         }
+
+
+        [MaxLength(20)]
         public string Name { get; set; }
         public string Surname { get; set; }
 

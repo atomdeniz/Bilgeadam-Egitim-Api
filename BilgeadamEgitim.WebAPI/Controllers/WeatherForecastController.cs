@@ -1,4 +1,4 @@
-﻿using BilgeadamEgitim.WebAPI.Models;
+﻿using BilgeadamEgitim.WebAPI;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -55,11 +55,6 @@ namespace BilgeadamEgitim.WebAPI.Controllers
 
 
 
-        [HttpPost]
-
-        public IEnumerable<WeatherForecast> Post(Student student)
-        {
-            return null;
-        }
+       
     }
 }

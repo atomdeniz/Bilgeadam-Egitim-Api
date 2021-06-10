@@ -1,4 +1,5 @@
 ﻿using BilgeadamEgitim.Core.Models;
+using BilgeadamEgitim.DataAccess.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace BilgeadamEgitim.DataAccess
@@ -17,6 +18,7 @@ namespace BilgeadamEgitim.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new ContentConfiguration());
         }
 
         public DbSet<Content> Contents { get; set; }
