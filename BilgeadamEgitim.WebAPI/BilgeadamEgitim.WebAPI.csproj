@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BilgeadamEgitim.DataAccess\BilgeadamEgitim.DataAccess.csproj" />
+    <ProjectReference Include="..\BilgeadamEgitim.Services\BilgeadamEgitim.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

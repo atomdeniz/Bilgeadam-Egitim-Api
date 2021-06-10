@@ -8,6 +8,6 @@ namespace BilgeadamEgitim.Core.Services
 {
     public interface IContentService
     {
-        Task<IEnumerable<Content>> GetAllContents();
+        Task<Content> CreateContent(Content newContent);
     }
 }

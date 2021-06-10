@@ -16,7 +16,7 @@ namespace BilgeadamEgitim.DataAccess.Migrations
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 20, nullable: true),
                     Surname = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -34,7 +34,7 @@ namespace BilgeadamEgitim.DataAccess.Migrations
                     UpdatedDate = table.Column<DateTime>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     Body = table.Column<string>(nullable: true),
-                    Title = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(maxLength: 50, nullable: false),
                     AuthorId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

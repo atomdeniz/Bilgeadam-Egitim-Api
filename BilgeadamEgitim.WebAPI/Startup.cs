@@ -1,4 +1,8 @@
+﻿using BilgeadamEgitim.Core.Services;
+using BilgeadamEgitim.Core.UOW;
 using BilgeadamEgitim.DataAccess;
+using BilgeadamEgitim.DataAccess.UOW;
+using BilgeadamEgitim.Services.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -24,8 +28,14 @@ namespace BilgeadamEgitim.WebAPI
             //services.AddDbContext<BlogDbContext>(options => options.UseSqlServer())
 
 
-            services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection"), x => x.MigrationsAssembly("BilgeadamEgitim.DataAccess")));
+            
             services.AddControllers();
+            services.AddScoped<IUnitOfWork, UnitOfWork>(); //her request süresince kullanılır
+            services.AddTransient<IContentService, ContentService>();
+            //services.AddTransient() //her servis çağırıldığında
+            //services.AddSingleton() //uygulama ayağa kalktığında bir kez oluşur
+
+            services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection"), x => x.MigrationsAssembly("BilgeadamEgitim.DataAccess")));
 
         }
 
