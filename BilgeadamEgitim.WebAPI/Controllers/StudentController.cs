@@ -34,11 +34,9 @@ namespace BilgeadamEgitim.WebAPI.Controllers
             {
                 Name = "Deniz",
                 Surname = "Özoğul",
-                Date = DateTime.Now,
                 
             };
 
-            DB.Add(student);
             return student;
         }
 
