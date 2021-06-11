@@ -28,7 +28,7 @@ namespace BilgeadamEgitim.WebAPI
             //services.AddDbContext<BlogDbContext>(options => options.UseSqlServer())
 
 
-            
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             services.AddScoped<IUnitOfWork, UnitOfWork>(); //her request süresince kullanılır
             services.AddTransient<IContentService, ContentService>();
@@ -37,6 +37,7 @@ namespace BilgeadamEgitim.WebAPI
 
             services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection"), x => x.MigrationsAssembly("BilgeadamEgitim.DataAccess")));
 
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +49,14 @@ namespace BilgeadamEgitim.WebAPI
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+
 
             app.UseRouting();
 

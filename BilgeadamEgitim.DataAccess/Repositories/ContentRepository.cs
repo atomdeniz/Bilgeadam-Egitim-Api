@@ -14,6 +14,7 @@ namespace BilgeadamEgitim.Core.Repositories
 
         }
 
+
         private BlogDbContext BlogDbContext
         {
             get { return Context as BlogDbContext; }

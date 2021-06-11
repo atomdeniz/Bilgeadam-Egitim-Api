@@ -1,5 +1,7 @@
-﻿using BilgeadamEgitim.Core.Models;
+﻿using AutoMapper;
+using BilgeadamEgitim.Core.Models;
 using BilgeadamEgitim.Core.Services;
+using BilgeadamEgitim.WebAPI.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,21 +17,37 @@ namespace BilgeadamEgitim.WebAPI.Controllers
     {
 
         private readonly IContentService _contentService;
-        public ContentController(IContentService contentService)
+        private readonly IMapper _mapper;
+
+        public ContentController(IContentService contentService, IMapper mapper)
         {
             this._contentService = contentService;
+            this._mapper = mapper;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Content>> CreateContent(Content saveContent)
+        public async Task<ActionResult<Content>> CreateContent(ContentDTO saveContent)
         {
-            saveContent.CreatedDate = DateTime.Now;
-            saveContent.UpdatedDate = DateTime.Now;
-            saveContent.IsDeleted = false;
 
-            var savedContent = await _contentService.CreateContent(saveContent);
+            var content = _mapper.Map<Content>(saveContent);
+            var savedContent = await _contentService.CreateContent(content);
 
             return Ok(saveContent);
+        }
+
+        [HttpGet("")]
+        public async Task<ActionResult<IEnumerable<ContentResponseDTO>>> GetAllContents()
+        {
+            var contents = await _contentService.GetAllContents();
+            var contentResources = _mapper.Map<IEnumerable<ContentResponseDTO>>(contents);
+            
+            //var contentsDto = contents.Select(x => new ContentDTO
+            //{
+            //    Id = x.Id,
+            //    Body = x.Body,
+            //    Title = x.Title
+            //});
+            return Ok(contentResources);
         }
     }
 }
