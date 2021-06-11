@@ -15,7 +15,6 @@ RUN dotnet restore "BilgeadamEgitim.WebAPI/BilgeadamEgitim.WebAPI.csproj"
 COPY . .
 WORKDIR "/src/BilgeadamEgitim.WebAPI"
 RUN dotnet build "BilgeadamEgitim.WebAPI.csproj" -c Release -o /app/build
-RUN dotnet ef database update
 
 FROM build AS publish
 RUN dotnet publish "BilgeadamEgitim.WebAPI.csproj" -c Release -o /app/publish
