@@ -9,7 +9,7 @@ namespace BilgeadamEgitim.Core.Models
     public class Content : BaseEntity
     {
         public string Body { get; set; }
-
+            
         [MaxLength(20)]
         public string Title { get; set; }
         public int AuthorId { get; set; }

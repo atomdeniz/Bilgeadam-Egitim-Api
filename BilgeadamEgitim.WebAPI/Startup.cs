@@ -3,12 +3,14 @@ using BilgeadamEgitim.Core.UOW;
 using BilgeadamEgitim.DataAccess;
 using BilgeadamEgitim.DataAccess.UOW;
 using BilgeadamEgitim.Services.Services;
+using BilgeadamEgitim.WebAPI.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 
 namespace BilgeadamEgitim.WebAPI
 {
@@ -29,7 +31,9 @@ namespace BilgeadamEgitim.WebAPI
 
 
             services.AddAutoMapper(typeof(Startup));
-            services.AddControllers();
+            //services.AddControllers();
+            services.AddControllers(options => { options.Filters.Add(new ApiExceptionFilter()); });
+            
             services.AddScoped<IUnitOfWork, UnitOfWork>(); //her request süresince kullanılır
             services.AddTransient<IContentService, ContentService>();
             //services.AddTransient() //her servis çağırıldığında

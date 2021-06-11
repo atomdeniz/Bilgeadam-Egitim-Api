@@ -19,8 +19,6 @@ namespace BilgeadamEgitim.Services.Services
 
         public async Task<Content> CreateContent(Content newContent)
         {
-            //newContent.CreatedDate = DateTime.Now;
-            //newContent.UpdatedDate = DateTime.Now;
             await _unitOfWork.Contents.AddAsync(newContent);
             await _unitOfWork.CommitAsync();
 
@@ -34,6 +32,27 @@ namespace BilgeadamEgitim.Services.Services
             var contents = await _unitOfWork.Contents.GetAllAsync();
 
             return contents;
+        }
+
+        public async Task<Content> GetContentById(int id)
+        {
+            return await _unitOfWork.Contents.GetByIdAsync(id);
+        }
+
+
+        public async Task UpdateContent(Content contentToBeUpdated, Content content)
+        {
+            contentToBeUpdated.Title = content.Title;
+            contentToBeUpdated.Body = content.Body;
+            await _unitOfWork.CommitAsync();
+        }
+
+
+        public async Task DeleteContent(int id)
+        {
+            var willDeleted = await _unitOfWork.Contents.GetByIdAsync(id);
+            _unitOfWork.Contents.Remove(willDeleted);
+            await _unitOfWork.CommitAsync();
         }
     }
 }

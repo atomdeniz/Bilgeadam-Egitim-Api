@@ -12,5 +12,12 @@ namespace BilgeadamEgitim.Core.Services
 
         Task<IEnumerable<Content>> GetAllContents();
 
+        Task<Content> GetContentById(int id);
+
+        Task UpdateContent(Content contentToBeUpdated, Content content);
+
+        Task DeleteContent(int id);
+
+
     }
 }
