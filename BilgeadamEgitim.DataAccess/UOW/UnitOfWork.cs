@@ -10,6 +10,8 @@ namespace BilgeadamEgitim.DataAccess.UOW
 
 
         private ContentRepository _contentRepository;
+        private UserRepository _userRepository;
+
 
         public UnitOfWork(BlogDbContext context)
         {
@@ -17,6 +19,9 @@ namespace BilgeadamEgitim.DataAccess.UOW
         }
 
         public IContentRepository Contents => _contentRepository = _contentRepository ?? new ContentRepository(_context);
+
+        public IUserRepository Users => _userRepository = _userRepository ?? new UserRepository(_context);
+
 
         public async Task<int> CommitAsync()
         {

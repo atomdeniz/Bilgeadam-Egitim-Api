@@ -9,6 +9,8 @@ namespace BilgeadamEgitim.Core.UOW
     public interface IUnitOfWork : IDisposable
     {
         IContentRepository Contents { get; }
+        IUserRepository Users { get; }
+
 
         Task<int> CommitAsync();
     }

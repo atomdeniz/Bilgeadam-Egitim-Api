@@ -35,7 +35,7 @@ namespace BilgeadamEgitim.DataAccess.Repositories
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return await Context.Set<TEntity>().ToListAsync(); 
+            return await Context.Set<TEntity>().ToListAsync();
         }
 
         public async ValueTask<TEntity> GetByIdAsync(int id)

@@ -19,9 +19,13 @@ namespace BilgeadamEgitim.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ContentConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+
         }
 
         public DbSet<Content> Contents { get; set; }
         public DbSet<Author> Authors { get; set; }
+        public DbSet<User> Users { get; set; }
+
     }
 }

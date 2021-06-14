@@ -3,6 +3,7 @@ using BilgeadamEgitim.Core.Models;
 using BilgeadamEgitim.Core.Services;
 using BilgeadamEgitim.WebAPI.DTO;
 using BilgeadamEgitim.WebAPI.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -31,7 +32,6 @@ namespace BilgeadamEgitim.WebAPI.Controllers
         {
             var content = _mapper.Map<Content>(saveContent);
             var savedContent = await _contentService.CreateContent(content);
-
             return Ok(saveContent);
         }
 

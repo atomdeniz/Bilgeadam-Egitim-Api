@@ -4,14 +4,16 @@ using BilgeadamEgitim.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BilgeadamEgitim.DataAccess.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    partial class BlogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210614094054_hasuserData")]
+    partial class hasuserData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,25 +124,25 @@ namespace BilgeadamEgitim.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2021, 6, 14, 12, 40, 55, 35, DateTimeKind.Local).AddTicks(6956),
+                            CreatedDate = new DateTime(2021, 6, 14, 12, 40, 55, 24, DateTimeKind.Local).AddTicks(1919),
                             Email = "deneme@gmail.com",
                             IsDeleted = false,
                             Name = "Deniz",
                             Password = "12345",
                             Surname = "Ozogul",
-                            UpdatedDate = new DateTime(2021, 6, 14, 12, 40, 55, 35, DateTimeKind.Local).AddTicks(6967),
+                            UpdatedDate = new DateTime(2021, 6, 14, 12, 40, 55, 24, DateTimeKind.Local).AddTicks(1930),
                             Username = "atomdeniz"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2021, 6, 14, 12, 40, 55, 35, DateTimeKind.Local).AddTicks(7217),
+                            CreatedDate = new DateTime(2021, 6, 14, 12, 40, 55, 24, DateTimeKind.Local).AddTicks(2184),
                             Email = "deneme2@gmail.com",
                             IsDeleted = false,
                             Name = "Mehmet",
                             Password = "123456",
                             Surname = "Ahmet",
-                            UpdatedDate = new DateTime(2021, 6, 14, 12, 40, 55, 35, DateTimeKind.Local).AddTicks(7235),
+                            UpdatedDate = new DateTime(2021, 6, 14, 12, 40, 55, 24, DateTimeKind.Local).AddTicks(2194),
                             Username = "mehmetahmet"
                         });
                 });
