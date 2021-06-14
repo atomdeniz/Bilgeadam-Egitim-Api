@@ -1,4 +1,5 @@
-﻿using BilgeadamEgitim.Core.Models;
+﻿using BilgeadamEgitim.Common.DTO;
+using BilgeadamEgitim.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,8 @@ namespace BilgeadamEgitim.Core.Services
     public interface IUserService
     {
         Task<IEnumerable<User>> GetAllUsers();
-        string Authenticate(string username, string password);
+        Task<LoginResponseDTO> Authenticate(string username, string password);
+        Task<User> UserRegister(User newUser);
 
     }
 }

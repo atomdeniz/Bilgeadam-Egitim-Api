@@ -1,4 +1,5 @@
-﻿using BilgeadamEgitim.Core.Models;
+﻿using BilgeadamEgitim.Common.DTO;
+using BilgeadamEgitim.Core.Models;
 using BilgeadamEgitim.Core.Services;
 using BilgeadamEgitim.Core.UOW;
 using BilgeadamEgitim.Services.Helper;
@@ -31,9 +32,10 @@ namespace BilgeadamEgitim.Services.Services
             return users;
         }
 
-        public string Authenticate(string username,string password)
+        public async Task<LoginResponseDTO> Authenticate(string username,string password)
         {
-            var user = _unitOfWork.Users.SingleOrDefaultAsync(x=> x.Username == username && x.Password == password);
+            var user = await _unitOfWork.Users.SingleOrDefaultAsync(x=> x.Username == username && x.Password == password);
+            
             if (user == null)
             {
                 return null;
@@ -45,7 +47,7 @@ namespace BilgeadamEgitim.Services.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                    new Claim(ClaimTypes., user.Id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -53,7 +55,25 @@ namespace BilgeadamEgitim.Services.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenstring = tokenHandler.WriteToken(token);
 
-            return tokenstring;
+            var loginResponse = new LoginResponseDTO
+            {
+                AccessToken = tokenstring,
+                Email = user.Email,
+                Name = user.Name,
+                Username = user.Username
+            };
+
+
+            return loginResponse;
         }
+
+        public async Task<User> UserRegister(User newUser)
+        {
+            await _unitOfWork.Users.AddAsync(newUser);
+            await _unitOfWork.CommitAsync();
+
+            return newUser;
+        }
+
     }
 }

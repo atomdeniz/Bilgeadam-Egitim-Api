@@ -36,6 +36,12 @@ namespace BilgeadamEgitim.WebAPI
 
             services.AddAutoMapper(typeof(Startup));
 
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
             var policy = new AuthorizationPolicyBuilder("Bearer").RequireAuthenticatedUser().Build();
             services.AddControllers(options =>
@@ -124,6 +130,7 @@ namespace BilgeadamEgitim.WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("MyPolicy");
             app.UseHttpsRedirection();
 
             app.UseSwagger();

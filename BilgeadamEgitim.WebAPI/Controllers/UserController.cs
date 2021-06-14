@@ -1,13 +1,10 @@
-﻿using BilgeadamEgitim.Core.Services;
-using BilgeadamEgitim.WebAPI.DTO;
+﻿using BilgeadamEgitim.Common.DTO;
+using BilgeadamEgitim.Core.Models;
+using BilgeadamEgitim.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BilgeadamEgitim.WebAPI.Controllers
 {
@@ -32,16 +29,36 @@ namespace BilgeadamEgitim.WebAPI.Controllers
 
         [HttpPost("authenticate")]
         [AllowAnonymous]
-        public IActionResult Authenticate(LoginDTO login)
+        public async Task<IActionResult> Authenticate(LoginDTO login)
         {
-            var usertoken = _userService.Authenticate(login.Username, login.Password);
+            var loginResponse = await _userService.Authenticate(login.Username, login.Password);
 
-            if (usertoken == null)
+            if (loginResponse == null)
             {
                 return BadRequest(new { message = "Kullanıcı adı veya şifre hatalı" });
             }
 
-            return Ok(usertoken);
+            return Ok(loginResponse);
+        }
+
+
+        [HttpPost("register")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Register(RegisterDTO register)
+        {
+            var user = new User
+            {
+                Email = register.Email,
+                Name = "Deniz",
+                Password = register.Password,
+                Surname = "Ozogul",
+                Username = register.Username
+            };
+
+            var registerReponse = await _userService.UserRegister(user);
+
+
+            return Ok(new JsonResult(new { message = "Kullanıcı başarılya oluşturuldu" }));
         }
     }
 }

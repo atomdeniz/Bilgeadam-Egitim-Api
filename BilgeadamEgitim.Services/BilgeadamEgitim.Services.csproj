@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BilgeadamEgitim.Common\BilgeadamEgitim.Common.csproj" />
     <ProjectReference Include="..\BilgeadamEgitim.Core\BilgeadamEgitim.Core.csproj" />
   </ItemGroup>
 

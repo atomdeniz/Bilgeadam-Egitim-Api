@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using BilgeadamEgitim.Common.DTO;
 using BilgeadamEgitim.Core.Models;
-using BilgeadamEgitim.WebAPI.DTO;
 
 namespace BilgeadamEgitim.WebAPI.Mapping
 {
